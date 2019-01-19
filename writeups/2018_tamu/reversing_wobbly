@@ -1,0 +1,25 @@
+
+###############################################################################
+#
+###############################################################################
+
+# running wobbly.out initially gives the message:
+You will find time can be quite volatile.
+
+# If you debug it, it prints out:
+TIME IS ON MY SIDE, NOT YOURS!
+# because of the clock check in the decode function.
+.text:0000000000000B98 8B 45 EC       mov     eax, [rbp+clock_endloop]
+.text:0000000000000B9B 2B 45 D4       sub     eax, [rbp+clock_begloop]
+.text:0000000000000B9E 83 F8 0F       cmp     eax, 0Fh
+.text:0000000000000BA1 7D 24          jge     short lo
+
+# So the decode function is making sure you're not using a debugger by checking
+# the clock cycle, but we can change the jump to check for a larger clock cycle
+0000000000000BA1 7E 24          jle     short loc_BC7
+# After changing it to be greater than, we can debug through the code using gdb
+0000000000000BA1 7D 24          jge     short loc_BC7
+
+# As we're debugging through we can see the flag on the stack
+0008| 0x7fffffffdd38 --> 0x7fffffffdd80 ("gigem{dont_Blink}\335\377\377\377\177")
+

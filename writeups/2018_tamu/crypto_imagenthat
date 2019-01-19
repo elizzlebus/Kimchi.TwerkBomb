@@ -1,0 +1,6 @@
+###############################################################################
+# The secret message is in an encrypted image using AES ECB mode
+# Because it's encrypted using ECB mode, you can make out the flag just by
+# eyeballing it. After opening the encrypted file, you can make out the letters 
+# in the flag. 
+###############################################################################

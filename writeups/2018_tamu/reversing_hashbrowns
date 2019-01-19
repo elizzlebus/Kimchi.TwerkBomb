@@ -1,0 +1,35 @@
+###############################################################################
+#
+###############################################################################
+
+# You may need to install 32-bit openssl
+# Error
+./hashbrowns.dms: error while loading shared libraries: libcrypto.so.1.0.0: cannot open shared object file: No such file or directory
+# Solution
+sudo apt-get install libssl-dev:i386
+
+# When running the program, the output is:
+# "mypassword" is the input
+ please enter the password 
+ the password is 20 characters or less 
+mypassword
+input string mypassword
+after afe796528c5f8c4518fd96327a7d07f
+invalid password
+
+# the after hash changes after every run with the same input
+# the hash does not change if running in gdb
+
+# It's probably doing a md5 hash of sort based on the function called 
+# "md5string" and the comparison to "8819d19069fae6b4bac183d1f16553abab16b54f"
+
+# After reversing md5string, found out that it's doing a md5 on the first 
+# character of the input string and some junk data which is probably causing it
+# to get a different hash everytime.
+
+# There really was no need to reverse because we can just use an online tool
+# to break the hash that it's comparing it to. Which was actually a sha1 hash.
+# There was no need to put in so much effort...
+# https://crackstation.net
+
+
